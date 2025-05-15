@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/grocerywiz/static/css/main.0eb84ea8.css",
+    "main.js": "/grocerywiz/static/js/main.5d74d998.js",
+    "index.html": "/grocerywiz/index.html",
+    "main.0eb84ea8.css.map": "/grocerywiz/static/css/main.0eb84ea8.css.map",
+    "main.5d74d998.js.map": "/grocerywiz/static/js/main.5d74d998.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0eb84ea8.css",
+    "static/js/main.5d74d998.js"
+  ]
+}
