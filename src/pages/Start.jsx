@@ -52,8 +52,7 @@ export default function Start() {
         <div className="start-container">
             <div className="start-content">
                 <Typography variant="h2" sx={{ fontWeight: 600 }}>GroceryWiz</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 500 }}>Eat Smart, Save More</Typography>
-                <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>Recipes, Videos, & Real-Time Grocery Prices</Typography>
+                <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>Recipes, Videos, & Grocery Lists</Typography>
                 <Button 
                     style={{ fontWeight: 600 }} 
                     onClick={handleGetStarted} 
