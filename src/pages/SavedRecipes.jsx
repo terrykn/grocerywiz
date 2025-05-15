@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { auth, db } from '../config';
 import { doc, getDoc } from 'firebase/firestore';
-import { Box, Typography, CardMedia, Card, CardContent, Button, CircularProgress } from '@mui/material';
-import SaveRecipe from '../components/SaveRecipe';
-import AddIngredients from '../components/AddIngredients';
-import ViewRecipe from '../components/ViewRecipe';
-import Masonry from '@mui/lab/Masonry';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import Navbar from '../components/Navbar';
+import DisplayRecipes from '../components/DisplayRecipes';
 
 export default function SavedRecipes() {
     const [recipes, setRecipes] = React.useState([]);
@@ -69,16 +66,6 @@ export default function SavedRecipes() {
         return () => unsubscribe();
     }, []);
 
-    const truncateDescription = (description) => {
-        if (!description) {
-            return '';
-        }
-        if (description.length > 200) {
-            return description.substring(0, 200) + '...';
-        }
-        return description;
-    };
-
     const handleRecipeOpen = (id) => {
         setOpenRecipeId(id);
     };
@@ -87,44 +74,18 @@ export default function SavedRecipes() {
         setOpenRecipeId(null);
     };
 
-    if (loading) {
-        return (
-            <div>
-                <Navbar />
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                    <CircularProgress />
-                </Box>
-            </div>
-        );
-    }
-
     return (
         <div>
             <Navbar />
             <Box sx={{ p: 3 }}>
                 <Typography variant="h4" sx={{ mt: 3, mb: 3 }}>Saved Recipes</Typography>
-                <Masonry columns={{ xs: 1, sm: 2, md: 4 }} spacing={2}>
-                    {recipes.map((recipe, index) => (
-                        <Card key={`${recipe.id}-${index}`} sx={{ p: 2, border: '1px solid #ccc', borderRadius: 2, boxShadow: 0 }}>
-                            <Typography variant="h7">{recipe.name}</Typography>
-                            {recipe.original_video_url && (
-                                <CardMedia
-                                    component="img"
-                                    image={recipe.thumbnail_url}
-                                    sx={{ mt: 2, width: '100%', height: 'auto', borderRadius: 2 }}
-                                />
-                            )}
-                            <Typography variant="body2" sx={{ mt: 1, mb: 1, minHeight: '3em' }}>{truncateDescription(recipe.description)}</Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', minHeight: '3em' }}>
-                                <Button variant='outlined' size='small' sx={{ height: 36, mr: .5, fontSize: 12 }} onClick={() => handleRecipeOpen(recipe.id)}>Recipe</Button>
-                                <ViewRecipe open={openRecipeId === recipe.id} onClose={handleRecipeClose} recipe={recipe} />
-                                <AddIngredients recipe={recipe} />
-                                <SaveRecipe recipe={recipe} />
-                            </Box>
-                            <Typography variant="caption">Time: {recipe.total_time_minutes} minutes</Typography>
-                        </Card>
-                    ))}
-                </Masonry>
+                <DisplayRecipes
+                    recipes={recipes}
+                    openRecipeId={openRecipeId}
+                    handleRecipeOpen={handleRecipeOpen}
+                    handleRecipeClose={handleRecipeClose}
+                    loading={loading}
+                />
             </Box>
         </div>
     );
