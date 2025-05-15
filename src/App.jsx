@@ -7,7 +7,7 @@ import SavedRecipes from './pages/SavedRecipes';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/grocerywiz">
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/home" element={<Home />} />
