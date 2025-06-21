@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: "grocerywiz-f2aeb",
   storageBucket: "grocerywiz-f2aeb.firebasestorage.app"
 };
-
+// hi
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
